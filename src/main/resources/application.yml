@@ -1,6 +1,21 @@
+# 서버 포트 설정
+server:
+  port: 8081
+
+# database 연동 설정
 spring:
   datasource:
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_root?serverTimezone=Asia/Seoul
+    username: root
+    password: 4023
+  thymeleaf:
+    cache: false
+
+  # spring data jpa 설정
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
