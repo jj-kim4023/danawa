@@ -6,9 +6,9 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 @Setter
 @Getter
-@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member extends BaseEntity {
