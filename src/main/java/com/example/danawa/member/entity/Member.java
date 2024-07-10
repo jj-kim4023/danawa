@@ -7,26 +7,23 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Setter
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@Setter
 public class Member extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "USERNAME")
-    private String username;
-
+    @Column(name = "PASSWORD")
     private String password;
 
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
     @Column(name = "NAME")
-    private String name;
+    private String username;
 
     @Column(name = "NICKNAME")
     private String nickname;
@@ -52,4 +49,5 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Address> addresses;
+
 }

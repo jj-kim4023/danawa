@@ -1,7 +1,7 @@
 package com.example.danawa.member.service;
 
 import com.example.danawa.member.dto.CustomUserDetails;
-import com.example.danawa.member.entity.UserEntity;
+import com.example.danawa.member.entity.Member;
 import com.example.danawa.member.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userData = memberRepository.findByUsername(username);
+        Member userData = memberRepository.findByUsername(username);
         if (userData != null) {
             return new CustomUserDetails(userData);
         }

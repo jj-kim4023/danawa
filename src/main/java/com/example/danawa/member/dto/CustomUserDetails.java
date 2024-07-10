@@ -1,18 +1,16 @@
 package com.example.danawa.member.dto;
 
-import com.example.danawa.member.entity.UserEntity;
+import com.example.danawa.member.entity.Member;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
-    private final UserEntity userEntity;
-    public CustomUserDetails(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    private final Member member;
+    public CustomUserDetails(Member userEntity) {
+        this.member = userEntity;
     }
 
     @Override
@@ -21,7 +19,7 @@ public class CustomUserDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return userEntity.getRole();
+                return member.getRole();
             }
         });
         return collection;
@@ -30,12 +28,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return member.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getUsername();
+        return member.getUsername();
     }
 
     @Override
@@ -45,6 +43,11 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
         return true;
     }
 }
