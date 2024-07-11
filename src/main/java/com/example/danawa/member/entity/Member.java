@@ -16,14 +16,14 @@ public class Member extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
+    @Column(name = "NAME")
+    private String username;
+
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL")//, nullable = false
     private String email;
-
-    @Column(name = "NAME")
-    private String username;
 
     @Column(name = "NICKNAME")
     private String nickname;

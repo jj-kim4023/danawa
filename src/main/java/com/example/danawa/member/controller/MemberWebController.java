@@ -3,9 +3,14 @@ package com.example.danawa.member.controller;
 import com.example.danawa.member.dto.JoinRequest;
 import com.example.danawa.member.service.MemberService;
 import com.example.danawa.member.service.MemberServiceImpl;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 @Controller
 @ResponseBody
@@ -16,20 +21,28 @@ public class MemberWebController {
         this.MemberService = memberService;
     }
 
-    @GetMapping
+    @PostMapping("/join")
+    public String joinProcess(JoinRequest joinRequest) {
+
+        System.out.println(joinRequest.getUsername());
+
+        MemberService.joinProcess(joinRequest);
+
+        return "ok";
+    }
+
+    @GetMapping("/")
     public String memberWebP() {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return "Member Controller";
-    }
-    @PostMapping("/join")
-    public String Member(JoinRequest joinRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        System.out.println(joinRequest.getUsername());
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+        GrantedAuthority auth = iter.next();
+        String role = auth.getAuthority();
 
-        MemberServiceImpl.joinProcess(joinRequest);
-
-        return "ok";
+        return "Member Controller" + username + role;
     }
 }
