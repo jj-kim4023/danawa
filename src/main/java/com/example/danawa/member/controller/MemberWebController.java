@@ -2,7 +2,6 @@ package com.example.danawa.member.controller;
 
 import com.example.danawa.member.dto.JoinRequest;
 import com.example.danawa.member.service.MemberService;
-import com.example.danawa.member.service.MemberServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,9 +15,10 @@ import java.util.Iterator;
 @ResponseBody
 public class MemberWebController {
 
-    private final MemberService MemberService;
+    private final MemberService memberService;
     public MemberWebController(MemberService memberService) {
-        this.MemberService = memberService;
+
+        this.memberService = memberService;
     }
 
     @PostMapping("/join")
@@ -31,7 +31,7 @@ public class MemberWebController {
         return "ok";
     }
 
-    @GetMapping("/")
+    @GetMapping("/member")
     public String memberWebP() {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
